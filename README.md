@@ -17,6 +17,9 @@
    Fayldagi kodlarni o'qib olib uni run qilish
 
        \i file_path
+   Ma'lumotlarni qator shaklidan ustun shakliga, ustun shaklidan qator shakliga o'zgartirish uchun ishlatiladi
+
+       \x
    Ma'lumotlar ba'zasini o'chirib yuborish
 
        DROP DATABASE database_name;
@@ -229,7 +232,29 @@
              car_id BIGINT REFERENCES car(id),   # car jadvalining id fieldiga yo'naltiryapmiz
              UNIQUE(car_id)   # car_id ni UNIQUE bo'lishini istadik shuning uchun CONSTRAINT qo'shdik
         );
-19. INNER JOIN
+19. INNER JOIN - jadvallar orasida relationship o'rnatilganda relationship o'rnatilgan fieldlarning qiymatlari mavjudlarini chiqarish uchun ishlatiladi, ya'ni a va b tablelarning kesishmasi qaytadi
+
+
+        SELECT * FROM users
+        JOIN car ON users.car_id = car.id;
+
+    Yana ham tushunarliroq qilish
+
+        SELECT users.first_name, car.make, car.model, car.price FROM USERS
+        JOIN car ON users.car_id = car.id;
+20. LEFT JOIN - o'zaro relationshipga ega a va b jadvallarining faqat a sidagi ma'lumotlar to'liq qaytadi
+    FOR EXAMPLE
+
+        SELECT * FROM users
+        LEFT JOIN car ON users.car_id = car.id;   # bu yerda users jadvali to'liq chiqariladi
+21. RIRGHT JOIN - o'zaro relationshipga ega a va b jadvallarining faqat b sidagi ma'lumotlar to'liq qaytariladi
+    FOR EXAMPLE
+
+        SELECT * FROM users
+        RIGHT JOIN car on users.car_id = car.id;   # bu yerda car jadvali to'liq chiqariladi
+22. Ma'lumotlarni CSV fayliga import qilib olish
+
+        \copy (SELECT * FROM users LEFT JOIN car ON car.id = users.car_id) TO 'C:\Users\User\Desctip\result.csv' DELIMITER ',' CSV HEADER;
 
               
 
