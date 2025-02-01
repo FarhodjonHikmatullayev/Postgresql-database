@@ -123,7 +123,8 @@
     GROUP BY uchun farq qiluvchi Example
     
         SELECT name, COUNT(*) FROM users GROUP BY name;  # har bir name va undan nechtadan borligini chiqaradi
-        SELECT name, COUNT(*) FROM users GROUP BY name ORDER BY name ASC;  # har bir name va undan nechtadan borligini chiqaradi, name ni o'sish bo'yicha tartiblaydi 
+        SELECT name, COUNT(*) FROM users GROUP BY name ORDER BY name ASC;  # har bir name va undan nechtadan borligini chiqaradi, name ni o'sish bo'yicha tartiblaydi
+        SELECT name, email, COUNT(*) FROM users GROUP BY name, email;
     HAVING - doim GROUP BY bilan ishlatiladi va undan keyin yoziladi,
 
         SELECT name, COUNT(*) FROM users GROUP BY name HAVING COUNT(*) > 5 ORDER BY name ASC;  # Bu yerda namelarning 5 tadan ko'p takrorlanganlari va ularning takrorlanish sonlarini chiqarib beradi
@@ -140,6 +141,24 @@
     4. ROUND() - yaxlitlash funksiyasi
 
            SELECT ROUND(AVG(price)) FROM car;  # car jadvalidagi mashinalar narxining o'rta arifmetigini topadi va uni yaxlitlab qaytaradi
+           SELECT model, MAX(price) FROM car GROUP BY model;  # car jadvalidagi barcha modellarning eng max narxlari va model nomini chiqarib ko'rsatadi
+    5. SUM() - yig'indini hisoblash funksiyasi
+
+           SELECT SUM(price) FROM car;  # car jadvalidagi varcha pricelar yig'indisini chiqaradi
+           SELECT model, SUM(price) FROM car GROUP BY model;  # modellar bo'yicha guruhlab o'sha modeldagi mashinalarning narxlari yig'indilari va model nomlarini birga chiqaradi
+12. Arifmetik operatsiyalar va ALIAS
+
+        SELECT 3 + 1;
+        SELECT 3 - 1;
+        SELECT 4 * 7;
+        SELECT 7 / 2; # butun qismni chiqaradi
+        SELECT 7!;  # factorial
+        SELECT 10 % 3; # qoldiqni chiqaradi
+        SELECT 100 * .10  # foizni aniqlash (100 ning 10 foizini aniqladi)
+    AS (ALIAS) - ustunni nomlash
+
+        SELECT 49 * 0.20 AS foiz;  # 49 ning 20 foizini topadi va column namega foiz deb yozadi
+        
        
        
 
