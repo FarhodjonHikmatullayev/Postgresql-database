@@ -48,7 +48,29 @@
 
        INSERT INTO users ( name, email, birthday)
        VALUES ('Bexruz', 'bexruz@gmail.com', DATE '1997-01-01');
-5. 
+5. Tabledan ma'lumotlarni o'qish
+   Jadvaldagi barcha ma'lumotlarni o'qish
+
+       SELECT * FROM table_name;
+   Jadvaldagi kerakli columnlarni o'qib olish
+
+       SELECT column_name FROM table_name;
+   Fore example
+
+       SELECT name, email, birthday FROM users;
+6. ORDER BY (ESENDING VA DISENDING)
+
+       SELECT * FROM table_name ORDER BY column_name;
+   Fore example
+
+       SELECT * FROM users ORDER BY birthday, email;
+      Bu yerda agar birthday bir xil bo'lib qolsa keyin email bo'yicha tartiblaydi
+   O'sish tartibida tartiblash
+
+       SELECT * FROM users ORDER BY birthday ASC;
+   Kamayish tartibida
+
+       SELECT * FROM users ORDER BY birthday DESC;
             
    
 
