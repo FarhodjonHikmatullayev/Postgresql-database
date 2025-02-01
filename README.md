@@ -200,6 +200,40 @@
     Tanlangan qatorlarni o'chirish
 
         DELETE FROM users WHERE name = 'Bexruz';
+17. UPDATE - jadvaldagi ma'lumotlarni o'zgartirish
+    SINTAKSIS
+
+        UPDATE table_name SET coll_name = 'yangi qiymat' WHERE shart;
+    For example
+
+        UPDATE users SET name = 'Farhod';  # users jadvalidagi barcha namelarni Farhodga o'zgartirib chiqadi
+        UPDATE users SET name = 'Farhod' WHERE name = 'Bexruz';  # users jadvalidagi Bexruz ismli ma'lumotlarning ismlarini Farhodga o'zgartirib chiqadi
+        UPDATE users SET name = 'Farhod', male = 'Male' WHERE name = 'Aziza';
+18. FOREIGN KEY, JOIN va RELATIONSHIPs
+    Foreign key (for example) - bu yerda car jadvalini users jadvalidan oldin yaratib olishimiz kerak chunki users jadvalida car_id fieldi orqali car jadvalini foreign key qilyapmiz
+
+        CREATE TABLE car(
+             id BIGSERIAL NOT NULL PRIMARY KEY,
+             make VARCHAR(100) NOT NULL,
+             model VARCHAR(100) NOT NULL,
+             price NUMERIC(19,2) NOT NULL
+        );
+
+        CREATE TABLE users(
+             id BIGSERIAL NOT NULL PRIMARY KEY,
+             first_name VARCHAR(50) NOT NULL,
+             last_name VARCHAR(50) NOT NULL,
+             email VARCHAR(100),
+             birthday DATE NOT NULL,
+             country VARCHAR(60) NOT NULL,
+             car_id BIGINT REFERENCES car(id),   # car jadvalining id fieldiga yo'naltiryapmiz
+             UNIQUE(car_id)   # car_id ni UNIQUE bo'lishini istadik shuning uchun CONSTRAINT qo'shdik
+        );
+19. INNER JOIN
+
+              
+
+        
     
        
 
