@@ -32,7 +32,7 @@
        CREATE TABLE users (
             id BIGSERIAL NOT NULL PRIMARY KEY,
             name VARCHAR(60) NOT NULL,
-            email VARCHAR(60) NOT NULL,
+            email VARCHAR(60) NOT NULL UNIQUE,
             birthday DATE NOT NULL
        );
    Data typelar haqida ma'lumot: https://www.postgresql.org/docs/13/datatype.html
@@ -190,7 +190,16 @@
 
         SELECT name, surname, email, AGE(NOW(), birthday) AS age FROM users;
         SELECT AGE(NOW(), '2004-05-02') AS yoshim;  # 20 years 8 mons 30 days 16:28:20.743028
-15. PRIMARY KEY - birlamchi kalit
+15. CHECK - shartni tekshirish uchun qo'llaniladi undan keyingi qavslar ichiga shart yoziladi
+
+        ALTER TABLE users ADD CONSTRAINT gender_constraint CHECK (gender='female' OR gender='male');  # endi insert qilinayotganda gender male yoki female bo'lishligiga tekshiradi
+16. DELETE - ma'lumotlarni jadvaldan o'chirib yuborish uchun ishlatiladi
+    Tabledagi barcha ma'lumotlarni o'chirish
+
+        DELETE FROM db_name;
+    Tanlangan qatorlarni o'chirish
+
+        DELETE FROM users WHERE name = 'Bexruz';
     
        
 
