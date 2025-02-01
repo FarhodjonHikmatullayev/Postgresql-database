@@ -116,6 +116,34 @@
 
        SELECT * FROM users WHERE email ILIKE '%.com';
 10. GROUP BY va HAVING
+    GROUP BY va DISTINCT biroz o'xshash lekin GROUP BY orqali qo'shimcha shart bajarsa ham bo'ladi (Quyidagi 2 qator bir xil natija qaytaradi)
+
+        SELECT DISTINCT name FROM users;
+        SELECT name FROM users GROUP BY name;
+    GROUP BY uchun farq qiluvchi Example
+    
+        SELECT name, COUNT(*) FROM users GROUP BY name;  # har bir name va undan nechtadan borligini chiqaradi
+        SELECT name, COUNT(*) FROM users GROUP BY name ORDER BY name ASC;  # har bir name va undan nechtadan borligini chiqaradi, name ni o'sish bo'yicha tartiblaydi 
+    HAVING - doim GROUP BY bilan ishlatiladi va undan keyin yoziladi,
+
+        SELECT name, COUNT(*) FROM users GROUP BY name HAVING COUNT(*) > 5 ORDER BY name ASC;  # Bu yerda namelarning 5 tadan ko'p takrorlanganlari va ularning takrorlanish sonlarini chiqarib beradi
+11. Aggrigate functions - https://www.postgresql.org/docs/9.5/functions-aggregate.html
+    1. MIN() - minimal qiymatni chiqaradi
+
+           SELECT MIN(price) FROM car;  # car jadvalidagi eng arzon mashina narxini chiqaradi
+    2. MAX() - maksimal qiymatni chiqaradi
+
+           SELECT MAX(price) FROM car;  # car jadvalidagi eng qimmat mashina narxini chiqaradi
+    3. AVG() - o'rtacha (arifmetik) qiymatni chiqaradi
+
+           SELECT AVG(price) FROM car;  # car jadvalidagi mashinalar narxining o'rta arifmetigini topib chiqaradi
+    4. ROUND() - yaxlitlash funksiyasi
+
+           SELECT ROUND(AVG(price)) FROM car;  # car jadvalidagi mashinalar narxining o'rta arifmetigini topadi va uni yaxlitlab qaytaradi
+       
+       
+
+    
     
        
 
