@@ -158,8 +158,40 @@
     AS (ALIAS) - ustunni nomlash
 
         SELECT 49 * 0.20 AS foiz;  # 49 ning 20 foizini topadi va column namega foiz deb yozadi
-        
-       
+13. COALESCE va NULLIF
+    COALESCE - birinchi null bo'lmagan qiymatni qaytaradi
+
+        SELECT COALESCE(null, 5, 78)  # 5 qiymatini qaytaradi
+        SELECT COALESCE(email, 'Email kiritilmagan') FROM users;  # null qiymatning o'rniga boshqa yozuvni chiqarish uchun ishlatilgan
+    NULLIF - 2 qiymatlar bir biriga teng bo'lsa null, teng bo'lmasa 1 - sining qiymatini qaytaradi
+
+        SELECT NULLIF(4, 4);  # null qaytaradi
+        SELECT NULLIF(6, 9);  # 6 ni qaytaradi
+        SELECT 5 / NULLIF(0, 0);  # sonni 0 ga bo'lgandagi errordan qochish, null qaytaradi
+        SELECT COALESCE(5 / NULLIF(0, 0), 0);  # bu 5 ni 0 ga bo'lganda error emas, 0 qaytaradi
+14. TIMESTAMP va DATE
+    NOW() - hozirgi vaqtni qaytaradi
+
+        SELECT NOW();  # 2025-02-01 16:04:15.816876+05
+        SELECT NOW()::DATE;  # 2025-02-01
+        SELECT NOW()::TIME;  # 16:06:59.948165
+    INTERVAL - bu orqali vaqt orqaga qaytarish va oldinga siljitish mumkin
+
+        SELECT NOW() - INTERVAL '1 YEAR';  # 1 yil oldingi vaqtni qaytaradi
+        SELECT NOW() + INTERVAL '5 MONTH';  # 5 oydan keyingi vaqtni qaytaradi
+        SELECT (NOW() + INTERVAL '4 MONTH')::DATE;  # 4 oydan keyingi sanani qaytaradi
+    EXTRACT() - asr, yil, oy, sana, minut, soat va sekund ni olsa bo'ladi (DOW - haftaning nechanchi kuni ekanini qaytaradi)
+
+        SELECT EXTRACT(YEAR FROM NOW());  # hozirgi yilni qaytaradi
+        SELECT EXTRACT(SECOND FROM (NOW() + INTERVAL '34 SECOND'));  # hozirgi vaqtdan 34 sekund keyingi sekundni qaytaradi
+        SELECT EXTRACT(DOW FROM NOW()) AS hafta_kuni;  # hozir haftaning nechanchi kuniligini chiqaradi
+        SELECT EXTRACT(CENTURY FROM NOW()) AS asr;  # hozirgi asrni qaytaradi
+    AGE(date, date) - yoshni hisoblash uchun ishlatiladi
+
+        SELECT name, surname, email, AGE(NOW(), birthday) AS age FROM users;
+        SELECT AGE(NOW(), '2004-05-02') AS yoshim;  # 20 years 8 mons 30 days 16:28:20.743028
+15. PRIMARY KEY - birlamchi kalit
+    
        
 
     
