@@ -289,6 +289,32 @@
 
            ALTER TABLE employees
            RENAME COLUMN age to employee_age;
+    5. Jadval nomini o'zgartirish
+
+
+           ALTER TABLE old_table_name
+           RENAME TO new_table_name;
+       Fore example
+
+           ALTER TABLE employees
+           RENAME TO staff;
+    6. Ustunlarga cheklovlar qo'shish
+
+           ALTER TABLE table_name
+           ADD CONSTRAINT constraint_name CHECK (condition);
+       Fore example
+
+           ALTER TABLE employees
+           ADD CONSTRAINT check_age CHECK (age >= 18);
+    7. Ustunlardan cheklovlarni o'chirish
+
+           ALTER TABLE table_name
+           DROP CONSTRAINT constraint_name;
+       Fore example
+
+           ALTER TABLE employees
+           DROP CONSTRAINT check_age;
+       
        
     
     
