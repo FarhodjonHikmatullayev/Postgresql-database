@@ -158,10 +158,22 @@
         SELECT 7!;  # factorial
         SELECT 10 % 3; # qoldiqni chiqaradi
         SELECT 100 * .10  # foizni aniqlash (100 ning 10 foizini aniqladi)
+
+        SELECT 'str1' || 'str2';  # ikkala strni qo'shib chiqaradi 'str1str2' shaklida
+        SELECT CONCAT('str1', 'str2');  # bu ham strlarni qo'shish uchun ishlatiladi
+        SELECT UPPER('str');  # katta harf qilib beradi 'STR' shaklida
+        SELECT LOWER('STR');  # kichik harf qilib beradi 'str' shaklida
+        SELECT INITCAP('PostgreSQL database');  # 'Postgresql Database' shaklida qaytaradi Capitalize() funksiyasidek
+        SELECT LENGTH('str');  # string uzunligini qaytaradi ya'ni 3 qaytadi
+        SELECT MD5('str');  # stringni shiflash uchun ishlatiladi
+        SELECT id, STRPOS(last_name, 'yev') FROM students;  # studentlar familiyasida 'yev' borlarini chiqaradi
+
+        SELECT INITCAP(CONCAT(first_name, ' ', last_name)) FROM students;  # example
+        SELECT INITCAP(CONCAT_WS(' ', first_name, last_name, birthday)) FROM students;  'First_name Last_name Birthday' shaklida chiqadi, bunda birinchi argument oradagi tashlanadigan joylarni bildiradi
     AS (ALIAS) - ustunni nomlash
 
         SELECT 49 * 0.20 AS foiz;  # 49 ning 20 foizini topadi va column namega foiz deb yozadi
-13. COALESCE va NULLIF
+14. COALESCE va NULLIF
     COALESCE - birinchi null bo'lmagan qiymatni qaytaradi
 
         SELECT COALESCE(null, 5, 78)  # 5 qiymatini qaytaradi
@@ -172,7 +184,7 @@
         SELECT NULLIF(6, 9);  # 6 ni qaytaradi
         SELECT 5 / NULLIF(0, 0);  # sonni 0 ga bo'lgandagi errordan qochish, null qaytaradi
         SELECT COALESCE(5 / NULLIF(0, 0), 0);  # bu 5 ni 0 ga bo'lganda error emas, 0 qaytaradi
-14. TIMESTAMP va DATE
+15. TIMESTAMP va DATE
     NOW() - hozirgi vaqtni qaytaradi
 
         SELECT NOW();  # 2025-02-01 16:04:15.816876+05
@@ -193,17 +205,17 @@
 
         SELECT name, surname, email, AGE(NOW(), birthday) AS age FROM users;
         SELECT AGE(NOW(), '2004-05-02') AS yoshim;  # 20 years 8 mons 30 days 16:28:20.743028
-15. CHECK - shartni tekshirish uchun qo'llaniladi undan keyingi qavslar ichiga shart yoziladi
+16. CHECK - shartni tekshirish uchun qo'llaniladi undan keyingi qavslar ichiga shart yoziladi
 
         ALTER TABLE users ADD CONSTRAINT gender_constraint CHECK (gender='female' OR gender='male');  # endi insert qilinayotganda gender male yoki female bo'lishligiga tekshiradi
-16. DELETE - ma'lumotlarni jadvaldan o'chirib yuborish uchun ishlatiladi
+17. DELETE - ma'lumotlarni jadvaldan o'chirib yuborish uchun ishlatiladi
     Tabledagi barcha ma'lumotlarni o'chirish
 
         DELETE FROM db_name;
     Tanlangan qatorlarni o'chirish
 
         DELETE FROM users WHERE name = 'Bexruz';
-17. UPDATE - jadvaldagi ma'lumotlarni o'zgartirish
+18. UPDATE - jadvaldagi ma'lumotlarni o'zgartirish
     SINTAKSIS
 
         UPDATE table_name SET coll_name = 'yangi qiymat' WHERE shart;
@@ -212,7 +224,7 @@
         UPDATE users SET name = 'Farhod';  # users jadvalidagi barcha namelarni Farhodga o'zgartirib chiqadi
         UPDATE users SET name = 'Farhod' WHERE name = 'Bexruz';  # users jadvalidagi Bexruz ismli ma'lumotlarning ismlarini Farhodga o'zgartirib chiqadi
         UPDATE users SET name = 'Farhod', male = 'Male' WHERE name = 'Aziza';
-18. FOREIGN KEY, JOIN va RELATIONSHIPs
+19. FOREIGN KEY, JOIN va RELATIONSHIPs
     Foreign key (for example) - bu yerda car jadvalini users jadvalidan oldin yaratib olishimiz kerak chunki users jadvalida car_id fieldi orqali car jadvalini foreign key qilyapmiz
 
         CREATE TABLE car(
@@ -232,7 +244,7 @@
              car_id BIGINT REFERENCES car(id),   # car jadvalining id fieldiga yo'naltiryapmiz
              UNIQUE(car_id)   # car_id ni UNIQUE bo'lishini istadik shuning uchun CONSTRAINT qo'shdik
         );
-19. INNER JOIN - jadvallar orasida relationship o'rnatilganda relationship o'rnatilgan fieldlarning qiymatlari mavjudlarini chiqarish uchun ishlatiladi, ya'ni a va b tablelarning kesishmasi qaytadi
+20. INNER JOIN - jadvallar orasida relationship o'rnatilganda relationship o'rnatilgan fieldlarning qiymatlari mavjudlarini chiqarish uchun ishlatiladi, ya'ni a va b tablelarning kesishmasi qaytadi
 
 
         SELECT * FROM users
@@ -242,20 +254,20 @@
 
         SELECT users.first_name, car.make, car.model, car.price FROM USERS
         JOIN car ON users.car_id = car.id;
-20. LEFT JOIN - o'zaro relationshipga ega a va b jadvallarining faqat a sidagi ma'lumotlar to'liq qaytadi
+21. LEFT JOIN - o'zaro relationshipga ega a va b jadvallarining faqat a sidagi ma'lumotlar to'liq qaytadi
     FOR EXAMPLE
 
         SELECT * FROM users
         LEFT JOIN car ON users.car_id = car.id;   # bu yerda users jadvali to'liq chiqariladi
-21. RIRGHT JOIN - o'zaro relationshipga ega a va b jadvallarining faqat b sidagi ma'lumotlar to'liq qaytariladi
+22. RIRGHT JOIN - o'zaro relationshipga ega a va b jadvallarining faqat b sidagi ma'lumotlar to'liq qaytariladi
     FOR EXAMPLE
 
         SELECT * FROM users
         RIGHT JOIN car on users.car_id = car.id;   # bu yerda car jadvali to'liq chiqariladi
-22. Ma'lumotlarni CSV fayliga import qilib olish
+23. Ma'lumotlarni CSV fayliga import qilib olish
 
         \copy (SELECT * FROM users LEFT JOIN car ON car.id = users.car_id) TO 'C:\Users\User\Desctip\result.csv' DELIMITER ',' CSV HEADER;
-23. ALTER TABLE
+24. ALTER TABLE
     1. Ustun qo'shish
 
            ALTER TABLE table_name
@@ -314,6 +326,41 @@
 
            ALTER TABLE employees
            DROP CONSTRAINT check_age;
+25. Sub query examples
+    Sinflar jadvali va jadvalda harbir klassdagi o'quvchilar soni ham chiqariladi 
+    
+        SELECT *, {
+            SELECT COUNT(*) FROM students WHERE students.class_id = classes.id
+        } FROM classes;
+    Barcha o'quvchiga ega bo'lgan sinflarni chiqarish
+
+        SELECT * FROM classes
+        WHERE id IN {SELECT class_id FROM students};
+26. UNION - jadvallarni vertikal birlashtirish
+    Example (bu yerda asosiy qoida: ustunlarning ma'lumot tiplari va soni bir xil bo'lishi kerak)
+
+        SELECT id, first_name FROM students
+        UNION
+        SELECT id, name FROM classes;
+    Example 2(Agar bir xil qiymatlarga ega qatorlar har ikkala to'plamda ham kelsa ular faqat bir marta chiqariladi)
+
+        SELECT id, first_name FROM students WHERE class_id = 1
+        UNION
+        SELECT id, first_name FROM students WHERE class_id = 2;
+
+27. Backup and Restore databases
+    Bin ga o'tib olish
+
+        cd C:\Program Files\PostgreSQL\16\bin
+    .dump file yuklab olish
+    
+        pg_dump -Fc -h host -U user_name -f file_name.dump db_name
+        pg_dump -Fc -h 127.0.0.1 -U postgres -f team.dump team  # example
+    Restore qilamiz
+
+        pg_restore -d new_db_name -h host -U new_db_user dump_file
+        pg_restore -d team3 -h 127.0.0.1 -U postgres team.dump # example
+        
        
        
     
