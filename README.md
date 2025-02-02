@@ -255,7 +255,43 @@
 22. Ma'lumotlarni CSV fayliga import qilib olish
 
         \copy (SELECT * FROM users LEFT JOIN car ON car.id = users.car_id) TO 'C:\Users\User\Desctip\result.csv' DELIMITER ',' CSV HEADER;
+23. ALTER TABLE
+    1. Ustun qo'shish
 
+           ALTER TABLE table_name
+           ADD COLUMN column_name data_type;
+       Fore example
+
+           ALTER TABLE employees
+           ADD COLUMN age INTEGER;
+    2. Ustunni o'chirish
+
+
+           ALTER TABLE table_name
+           DROP COLUMN column_name;
+       Fore example
+
+           ALTER TABLE employees
+           DROP COLUMN age;
+    3. Ustun tipini o'zgartirish
+
+           ALTER TABLE table_name
+           ALTER COLUMN column_name SET DATA TYPE new_data_type;
+       Fore example
+
+           ALTER TABLE employees
+           ALTER COLUMN age SET DATA TYPE SMALLINT;
+    4. Ustun nomini o'zgartirish
+
+           ALTER TABLE table_name
+           RENAME COLUMN old_column_name TO new_column_name;
+       Fore example
+
+           ALTER TABLE employees
+           RENAME COLUMN age to employee_age;
+       
+    
+    
               
 
         
